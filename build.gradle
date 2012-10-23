@@ -1,0 +1,38 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+
+repositories {
+	mavenCentral()
+	
+	maven {
+	   url "http://repository.springsource.com/maven/bundles/release"
+	}
+	maven {
+	   url "http://repository.springsource.com/maven/bundles/external"
+	}
+}
+
+configurations {
+   all*.exclude group: 'commons-logging', module: 'commons-logging'
+}
+dependencies {
+   groovy 'org.codehaus.groovy:groovy-all:1.8.8'
+   
+   compile 'org.milyn:milyn-smooks-edi:1.5.1'
+   compile 'org.slf4j:jcl-over-slf4j:1.6.6'
+   runtime 'org.slf4j:slf4j-simple:1.6.6'
+   
+   testCompile 'junit:junit:4.10'
+   testCompile 'org.spockframework:spock-core:0.7-groovy-1.8'
+   testCompile 'xmlunit:xmlunit:1.3'
+}
+
+task wrapper(type: Wrapper) {
+   gradleVersion = '1.2'
+}
+task "create-dirs" << {
+   sourceSets*.java.srcDirs*.each { it.mkdirs() }
+   sourceSets*.groovy.srcDirs*.each { it.mkdirs() }
+   sourceSets*.resources.srcDirs*.each { it.mkdirs() }
+}

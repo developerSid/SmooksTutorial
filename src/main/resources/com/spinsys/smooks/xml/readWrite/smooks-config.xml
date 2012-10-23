@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<smooks-resource-list xmlns="http://www.milyn.org/xsd/smooks-1.1.xsd"
+                      xmlns:core="http://www.milyn.org/xsd/smooks/smooks-core-1.4.xsd"
+                      xmlns:jb="http://www.milyn.org/xsd/smooks/javabean-1.4.xsd">
+
+	<core:namespaces>
+		<core:namespace prefix="ord" uri="http://acme.com/order" />
+	</core:namespaces>
+	
+	<jb:bean beanId="order" class="com.spinsys.smooks.xml.readWrite.Order" createOnElement="/ord:order">
+		<jb:wiring property="header" beanIdRef="header" />
+		<jb:wiring property="orderItems" beanIdRef="orderItems" />
+	</jb:bean>
+	<jb:bean beanId="header" class="com.spinsys.smooks.xml.readWrite.Header" createOnElement="/ord:order/ord:header">
+		<jb:value property="date" decoder="Date" data="#/ord:date">
+			<jb:decodeParam name="format">EEE MMM dd HH:mm:ss z yyyy</jb:decodeParam>
+			<jb:decodeParam name="locale">en_IE</jb:decodeParam>
+		</jb:value>
+		<jb:value property="customerNumber" data="#/ord:customer/@number" />
+		<jb:value property="customerName" data="#/ord:customer" />
+	</jb:bean>
+	<jb:bean beanId="orderItems" class="java.util.ArrayList" createOnElement="/ord:order/ord:order-items">
+		<jb:wiring beanIdRef="orderItem" />
+	</jb:bean>
+	<jb:bean beanId="orderItem" class="com.spinsys.smooks.xml.readWrite.OrderItem" createOnElement="/ord:order/ord:order-items/ord:order-item">
+		<jb:value property="productId" data="#/ord:product" />
+		<jb:value property="quantity" data="#/ord:quantity" />
+		<jb:value property="price" data="#/ord:price" decoder="Double">
+			<jb:decodeParam name="format">###.00</jb:decodeParam>
+			<jb:decodeParam name="locale">en_IE</jb:decodeParam>
+		</jb:value>
+	</jb:bean>
+
+</smooks-resource-list>
