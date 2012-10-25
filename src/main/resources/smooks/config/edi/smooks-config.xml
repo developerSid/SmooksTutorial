@@ -5,6 +5,6 @@
     <!--
     Configure the EDI Reader to process the message stream into a stream of SAX events.
     -->
-    <edi:reader mappingModel="com/spinsys/smooks/xml/readWrite/transform/edi/edi-to-xml-order-mapping.xml" />
+    <edi:reader mappingModel="smooks/config/edi/edi-to-xml-order-mapping.xml" />
  
 </smooks-resource-list>

@@ -15,7 +15,7 @@ class TestXMLtoEDI extends Specification
    
    def setup()
    {
-      def stream=this.class.classLoader.getResourceAsStream("com/spinsys/smooks/xml/readWrite/transform/edi/smooks-config.xml")
+      def stream=this.class.classLoader.getResourceAsStream("smooks/config/edi/smooks-config.xml")
       
       try
       {

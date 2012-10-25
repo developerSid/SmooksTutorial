@@ -19,7 +19,7 @@ configurations {
 dependencies {
    groovy 'org.codehaus.groovy:groovy-all:1.8.8'
    
-   compile 'org.milyn:milyn-smooks-edi:1.5.1'
+   compile 'org.milyn:milyn-smooks-all:1.5.1'
    compile 'org.slf4j:jcl-over-slf4j:1.6.6'
    runtime 'org.slf4j:slf4j-simple:1.6.6'
    
